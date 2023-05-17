@@ -1,0 +1,32 @@
+{
+    "name": "fookie-dynamodb",
+    "description": "",
+    "version": "0.0.0",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "echo 'no-test'",
+        "build": "tsc",
+        "lint": "npx eslint packages"
+    },
+    "dependencies": {
+        "dynamoose": "^3.2.0",
+        "fookie-types": "^1.0.3",
+        "lodash": "^4.17.21",
+        "uuid": "^9.0.0"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.191",
+        "@typescript-eslint/eslint-plugin": "^5.56.0",
+        "@typescript-eslint/parser": "^5.56.0",
+        "@vitest/coverage-istanbul": "^0.29.3",
+        "@vitest/ui": "^0.29.3",
+        "eslint": "^8.36.0",
+        "typescript": "^5.0.2",
+        "vitest": "^0.29.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fookiejs/core.git"
+    },
+    "homepage": "https://github.com/fookiejs/core.git#readme"
+}
