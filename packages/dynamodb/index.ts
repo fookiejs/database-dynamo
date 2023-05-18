@@ -77,8 +77,6 @@ export function initDynamoDB(fookie: Fookie): DatabaseInterface {
                 const type = typeMap.find(function (tp) {
                     return tp.from === model.schema[field].type
                 })
-
-                console.log(type, field)
                 if (!type) {
                     throw Error("invalid_dynamodb_type")
                 }
@@ -94,7 +92,6 @@ export function initDynamoDB(fookie: Fookie): DatabaseInterface {
 
             model.methods.read = async function (payload, state) {
                 const filter = queryFixer(payload.query.filter, lodash)
-                console.log(payload.query)
 
                 const scan = MDL.scan(filter).attributes([...payload.query.attributes, "id", "ts"])
                 const response = await scan.exec()
