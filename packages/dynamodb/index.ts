@@ -55,8 +55,12 @@ export function initDynamoDB(fookie: Fookie): DatabaseInterface {
     return fookie.Core.database({
         pk_type: fookie.Type.Text,
         pk: "id",
-        connect: async function () {},
-        disconnect: async function () {},
+        connect: async function () {
+            return true
+        },
+        disconnect: async function () {
+            return true
+        },
         modify: async function (model) {
             const defaultSchema = {
                 id: {
@@ -105,7 +109,7 @@ export function initDynamoDB(fookie: Fookie): DatabaseInterface {
             }
             model.methods.delete = async function (payload, state) {
                 const filter = queryFixer(payload.query.filter, lodash)
-                let scan = MDL.scan(filter).attributes(["id"])
+                const scan = MDL.scan(filter).attributes(["id"])
                 const list = await scan.exec()
                 const response = await MDL.batchDelete(lodash.map(list, "id"))
                 payload.response.data = response
@@ -113,7 +117,7 @@ export function initDynamoDB(fookie: Fookie): DatabaseInterface {
             model.methods.update = async function (payload, state) {
                 const filter = queryFixer(payload.query.filter, lodash)
                 const scan = MDL.scan(filter)
-                let list = await scan.exec()
+                const list = await scan.exec()
 
                 const chunks = lodash.chunk(list, 25)
 
@@ -129,7 +133,7 @@ export function initDynamoDB(fookie: Fookie): DatabaseInterface {
 
             model.methods.count = async function (payload, state) {
                 const filter = queryFixer(payload.query.filter, lodash)
-                let scan = MDL.scan(filter)
+                const scan = MDL.scan(filter)
                 const count = await scan.count().exec()
 
                 payload.response.data = count
